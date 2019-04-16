@@ -1,6 +1,6 @@
-#Documentation for "flg_framework"
+# Documentation for "flg_framework"
 
-##Mysql installs
+## Mysql installs
 
 **On POST, PUT, DELETE requests, all values must be passed in content-type application/x-www-form-urlencoded**
 
