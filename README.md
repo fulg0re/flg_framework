@@ -2,24 +2,67 @@
 
 ## Mysql installs
 
-**On POST, PUT, DELETE requests, all values must be passed in content-type application/x-www-form-urlencoded**
+- By default you can create install files in next path:
 
-**Error 304 tells that request does not affect any rows in database or have 0 values to update**
-
-**Error 400 tells that you pass invalid arguments**
-
-**Error 401 tells that your JWT token is missing or invalid**
-
-**Error 500 tells about server error or another unexpected errors**
-
-**All error responses will have JSON**
 ```
+install/bd/mysql/
+```
+
+```
+...
+
+module.exports.installDir = 'install/db/mysql/';
+
+...
+```
+
+- File name must start with "**Install_#1_#2**"
+(#1 - number of install file; #2 - description)
+```
+Example:
+
+"Install_001_CreateUserTable.js"
+```
+
+- Main file content:
+```
+let AbstractInstallService = require('../../../core/db/mysql/AbstractInstallService.js');
+
+class CreateUserTable extends AbstractInstallService
 {
-    "error": "errorMessageHere"
+    constructor()
+    {
+        super();
+
+        this.query = [
+            'mysql_query1',
+            'mysql_query2',
+            ...
+        ];
+        
+        this.queryData = [
+            [
+                'mysql_query1_value1',
+                'mysql_query1_value2',
+                ...
+            ],
+            [
+                'mysql_query2_value1',
+                'mysql_query2_value2',
+                ...
+            ],
+        ];
+    }
 }
+
+module.exports = CreateUserTable;
 ```
 
-**Status 200 gives valid response**
+**this.query** - [array] - list of queries
+
+**this.queryData** - [array of arrays] - list of variables for query list (optional)
+
+
 
 
 #Routes:
