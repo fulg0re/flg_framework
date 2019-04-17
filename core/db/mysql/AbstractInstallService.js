@@ -14,12 +14,11 @@ class AbstractInstallService
         return new Promise(async (resolve, reject) => {
             try {
                 let result = [];
-                let index = 0;
-                this.query.forEach(async (query) => {
-                    let run = await global.dbConnection.runQuery(query, this.queryData[index]);
+
+                for (let index = 0; index < this.query.length; index++) {
+                    let run = await global.dbConnection.runQuery(this.query[index], this.queryData[index]);
                     result.push(run);
-                    index++;
-                });
+                }
 
                 resolve(result);
 

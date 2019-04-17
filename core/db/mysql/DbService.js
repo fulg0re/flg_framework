@@ -175,6 +175,10 @@ class DbService {
             try {
                 let select = await this.installModel.selectFilesForInstall(type);
 
+                if (select.length === 0) {
+                    resolve();
+                }
+
                 let index = 1;
                 if (select.length > 0) {
                     select.forEach(async (fileData) => {
